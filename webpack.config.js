@@ -3,7 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
-  devtool: 'inline-source-map',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -17,19 +23,14 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/figmaPlugin/figmaPluginUI.tsx',
     }),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
   },
 };

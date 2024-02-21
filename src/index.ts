@@ -1,24 +1,16 @@
-```typescript
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { SubmitButton } from './components/SubmitButton';
-import { CompareButton } from './components/CompareButton';
-import { TextInput } from './components/TextInput';
-import { CSVExport } from './components/CSVExport';
-import { figmaPlugin } from './figmaPlugin';
-import { webScraper } from './webScraper';
-import { compareData } from './compareData';
+import express from 'express';
+import { figmaController } from './server/controllers/figmaController';
+import { webScraperController } from './server/controllers/webScraperController';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <TextInput />
-    <SubmitButton onClick={webScraper.crawlURLs} />
-    <CompareButton onClick={compareData.compareTextNodes} />
-    <CSVExport />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const app = express();
+const port = process.env.PORT || 3000;
 
-figmaPlugin.on('SUBMIT_CLICKED', webScraper.extractTextNodes);
-figmaPlugin.on('COMPARE_CLICKED', compareData.compareTextNodes);
-```
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/figma', figmaController);
+app.use('/web-scraper', webScraperController);
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

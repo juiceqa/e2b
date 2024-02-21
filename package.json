@@ -4,36 +4,34 @@
   "description": "A web scraping tool to extract data from staging link.",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node src/index.ts",
+    "start": "node src/server/index.js",
     "build": "tsc",
     "test": "jest"
   },
-  "keywords": [
-    "web-scraper",
-    "figma-plugin",
-    "csv-writer",
-    "nodehun",
-    "react",
-    "typescript"
-  ],
+  "keywords": ["web-scraper", "figma-plugin", "csv-export"],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@create-figma-plugin/ui": "^1.0.0",
-    "@create-figma-plugin/utilities": "^1.0.0",
-    "csv-writer": "^1.6.0",
     "express": "^4.17.1",
+    "react": "^17.0.2",
+    "typescript": "^4.3.5",
+    "csv-writer": "^1.6.0",
     "node-fetch": "^2.6.1",
     "nodehun": "^2.0.9",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@create-figma-plugin/ui": "^1.0.0",
+    "@create-figma-plugin/utilities": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
+    "@types/express": "^4.17.11",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.4"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }
